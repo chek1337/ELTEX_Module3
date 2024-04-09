@@ -41,6 +41,7 @@ int main(int argc, char *argv[])
             sprintf(strNum, "%d", randNum);
             write(fd[1], strNum, sizeof(strNum));
         }
+        
         close(fd[1]);
         printf("Child finished!\n");
         exit(EXIT_SUCCESS);
@@ -55,6 +56,7 @@ int main(int argc, char *argv[])
             read(fd[0], strNum, sizeof(strNum));
             printf("%s\n", strNum);
         }
+        
         close(fd[0]);
         printf("Parent finished!\n");
         exit(EXIT_SUCCESS);
