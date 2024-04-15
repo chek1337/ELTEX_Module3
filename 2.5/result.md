@@ -2,7 +2,7 @@
 ### SIGINT 
 Сигнал прерывания (Ctrl-C) с терминала
 *(Завершение)*
-```bash
+```Shell
 zeuslinux@zeuslinux:~/Documents/ELTEX/Module3/lection2/2.5$ ./main &
 [1] 7973
 Program launched with PID: 7973
@@ -15,7 +15,7 @@ kill -s SIGKILL 7973
 Сигнал «Quit» с терминала (Ctrl-\\) 
 *(Завершение с дампом памяти)*
 
-```bash
+```Shell
 zeuslinux@zeuslinux:~/Documents/ELTEX/Module3/lection2/2.5$ ./main &
 [1] 8557
 Program launched with PID: 8557
@@ -85,13 +85,9 @@ kill -s SIGTSTP 9883
 ```Shell
 zeuslinux@zeuslinux:~/Documents/ELTEX/Module3/lection2/2.5$ ./main &
 [2] 10030
-zeuslinux@zeuslinux:~/Documents/ELTEX/Module3/lection2/2.5$ 
 Program launched with PID: 10030
 kill -s SIGSTOP 10030
 [2]+  Stopped                 ./main
-zeuslinux@zeuslinux:~/Documents/ELTEX/Module3/lection2/2.5$ 
-
-
 ```
 
 ### SIGCONT
