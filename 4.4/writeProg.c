@@ -3,8 +3,6 @@
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
-// #include <sys/sem.h>
-// #include <sys/wait.h>
 #include <sys/ipc.h>
 #include <semaphore.h>
 #include <sys/stat.h>
@@ -61,139 +59,7 @@ int main()
     
     sem_unlink(SEMNAME1);
     sem_unlink(SEMNAME2);
-    // close(fd);
+    close(fd);
     printf("finish\n");
 }
 
-// int main()
-// {
-//     int fd, randNum;
-//     char msgBuf[BUF_SIZE];
-//     if(mkfifo(NAMEDPIPE_NAME, 0660) == -1)
-//     {
-//         if(errno != EEXIST)
-//         {
-//             perror("mkfifo");
-//             exit(EXIT_FAILURE);
-//         }
-//         else
-//             printf("%s is existing, connect to this file\n", NAMEDPIPE_NAME);
-        
-//     }
-//     printf("%s is created\n", NAMEDPIPE_NAME);
-
-//     fd = open(NAMEDPIPE_NAME, O_RDWR);
-//     if ( fd == -1 ) 
-//     {
-//         perror("open");
-//         exit(EXIT_FAILURE);
-//     }
-//     printf("%s is opened to write\n", NAMEDPIPE_NAME);
-
-//     sem_t *semRead = sem_open(PATHNAME1, O_CREAT | 0666);
-//     if(errno == EEXIST)
-//         semRead = sem_open(PATHNAME1, 0666);
-//     if(semRead == SEM_FAILED)
-//     {
-//         perror("sem_open1");
-//         exit(EXIT_FAILURE);
-//     }
-
-//     sem_t *semWrite = sem_open(PATHNAME2, O_CREAT | 0666);
-//     if(errno == EEXIST)
-//         semWrite = sem_open(PATHNAME2,  0666);
-//     if(semWrite == SEM_FAILED)
-//     {
-//         perror("sem_open2");
-//         exit(EXIT_FAILURE);
-//     }
-
-//     srand(time(NULL));
-//     sem_wait(semWrite);
-//     sem_wait(semWrite);
-//     sem_wait(semWrite);
-//     sem_wait(semWrite);
-//     sem_wait(semWrite);
-//     sem_wait(semWrite);
-//     sem_wait(semWrite);
-//     for (int i = 0; i < 10; i++)
-//     {
-//         sem_wait(semWrite);
-//         randNum = rand() % 1000;
-//         sprintf(msgBuf, "%d", randNum);
-//         write(fd, msgBuf, BUF_SIZE);
-//         printf("writeProg send: %s\n", msgBuf);
-//         sem_post(semRead);
-//     }
-//     sem_post(semRead);
-    
-
-//     sem_unlink(PATHNAME1);
-//     sem_unlink(PATHNAME2);
-//     close(fd);
-//     printf("finish\n");
-// }
-
-// int main()
-// {
-//     int fd, randNum;
-//     char msgBuf[BUF_SIZE];
-//     if(mkfifo(NAMEDPIPE_NAME, 0770) == -1)
-//     {
-//         if(errno != EEXIST)
-//         {
-//             perror("mkfifo");
-//             exit(EXIT_FAILURE);
-//         }
-//         else
-//             printf("%s is existing, connect to this file\n", NAMEDPIPE_NAME);
-        
-//     }
-//     printf("%s is created\n", NAMEDPIPE_NAME);
-
-//     fd = open(NAMEDPIPE_NAME, O_RDWR);
-//     if ( fd == -1 ) 
-//     {
-//         perror("open");
-//         exit(EXIT_FAILURE);
-//     }
-//     printf("%s is opened to write\n", NAMEDPIPE_NAME);
-
-//     // Создание семафора для считывания данных
-//     key_t key1 = ftok(PATHNAME, 0);
-//     int semRead = semget(key1, 1, IPC_CREAT | 0660);
-//     if (semRead == -1) {
-//         perror("semget");
-//         exit(1);
-//     }
-
-//     // Создание семафора для записи данных
-//     key_t key2 = ftok(PATHNAME, 1);
-//     int semWrite = semget(key2, 1, IPC_CREAT | 0660);
-//     if (semWrite == -1) {
-//         perror("semget");
-//         exit(1);
-//     }
-
-//     // Установка начальный значений семафоров
-//     if (semctl(semRead, 0, SETVAL, 0) == -1 || semctl(semWrite, 0, SETVAL, 0) == -1) 
-//     {
-//         perror("semctl");
-//         exit(1);
-//     }
-
-//     srand(time(NULL));
-//     for (int i = 0; i < 10; i++)
-//     {
-//         P(semWrite);
-//         randNum = rand() % 1000;
-//         sprintf(msgBuf, "%d", randNum);
-//         write(fd, msgBuf, BUF_SIZE);
-//         printf("writeProg send: %s\n", msgBuf);
-//         V(semRead);
-//     }
-//     V(semRead);
-    
-//     close(fd);
-//     exit(EXIT_SUCCESS);
-// }
